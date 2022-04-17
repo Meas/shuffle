@@ -46,11 +46,13 @@ const onSearch = async (e: string) => {
   shouldUpdateFromCollection = true;
 
   collectionList = handleCollectionSort(apiState.data);
+  console.log(collectionList);
 };
 const handleItemShift = () => {
   const item = list.value.shift();
-  if (shouldUpdateFromCollection && collectionList.length)
-    return handleAddCollectionToList();
+  // Opted out to not update the list the item is already there (per tick)
+  // since this case was not covered in the assignment
+  if (shouldUpdateList()) return handleAddCollectionToList();
   else if (item) list.value.push(item);
 };
 const handleAddCollectionToList = () => {
@@ -58,6 +60,13 @@ const handleAddCollectionToList = () => {
   collectionIndex++;
   if (collectionIndex == collectionList.length)
     shouldUpdateFromCollection = false;
+};
+const shouldUpdateList = () => {
+  return (
+    shouldUpdateFromCollection &&
+    collectionList.length &&
+    !list.value.some((item) => item.id === collectionList[collectionIndex].id)
+  );
 };
 
 // Lifecycle

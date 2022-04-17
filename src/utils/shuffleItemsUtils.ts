@@ -1,6 +1,8 @@
 import type { ShuffleItem } from "@/models/shuffleItem.interface";
 import type { ItunesItem } from "@/services/itunesService";
 
+import { removeDuplicatesByKey } from "@/utils/generalUtils";
+
 export const getDefaultValues = (): ShuffleItem[] => {
   return [
     {
@@ -27,7 +29,9 @@ export const getDefaultValues = (): ShuffleItem[] => {
 };
 
 export const handleCollectionSort = (data: ItunesItem[]) => {
-  return data
+  const unique = removeDuplicatesByKey(data, "collectionId");
+  return unique
+    .filter((item) => item.collectionName && item.collectionId)
     ?.sort((a, b) => (a.collectionName > b.collectionName ? 1 : -1))
     .slice(0, 5)
     .map((item) => {
