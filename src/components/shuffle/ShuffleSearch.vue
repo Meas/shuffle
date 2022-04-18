@@ -6,7 +6,6 @@ const emit = defineEmits<{
 }>();
 
 const onInput = debounce((e: Event) => {
-  console.log((e.target as HTMLInputElement).value);
   /* emit("on-search", (e.target as HTMLInputElement).value); */
   emit("on-search", (e.target as HTMLInputElement).value);
 }, 250);

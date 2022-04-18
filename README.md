@@ -27,6 +27,9 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 npm install
 ```
 
+### Add .env file
+
+Copy contents of .env.example to .env file
 ### Compile and Hot-Reload for Development
 
 ```sh

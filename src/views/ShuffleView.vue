@@ -27,10 +27,6 @@ let collectionIndex = 0;
 let shouldUpdateFromCollection = true;
 
 // Methods
-const helloWorld = () => {
-  console.log("hello world");
-  clearInterval(interval);
-};
 const init = () => {
   interval = setInterval(() => {
     handleItemShift();
@@ -46,7 +42,6 @@ const onSearch = async (e: string) => {
   shouldUpdateFromCollection = true;
 
   collectionList = handleCollectionSort(apiState.data);
-  console.log(collectionList);
 };
 const handleItemShift = () => {
   const item = list.value.shift();
@@ -76,7 +71,7 @@ onUnmounted(() => clearInterval(interval));
 
 <template>
   <div>
-    <h1 class="text-center" @click="helloWorld">Itunes Shuffle</h1>
+    <h1 class="text-center">Itunes Shuffle</h1>
     <div class="col-12 col-md-8 col-lg-6 mx-auto mt-5">
       <ShuffleSearch @on-search="onSearch" />
     </div>

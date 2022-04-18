@@ -6,7 +6,9 @@ import type { ItunesItem } from "./itunesService.interface";
 export * from "./itunesService.interface";
 
 export async function getData(term: string): Promise<ItunesItem[]> {
-  const params = { term };
+  // For some odd reason, if we add entity=album to our request we avoid cors issue
+  // that happens for certain term strings
+  const params = { term, entity: "album" };
 
   return http
     .get("search", { params })
